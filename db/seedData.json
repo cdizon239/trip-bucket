@@ -1,0 +1,14 @@
+[
+    {
+    "name": "California 2022",
+    "start_date": "Tue Feb 01 2022 00:00:00 GMT+0000 (GMT)",
+    "end_date": "Wed Feb 08 2022 00:00:00 GMT+0000 (GMT)",
+    "cities_to_visit": ["Los Angeles", "Santa Monica"]
+    },
+    {
+    "name": "East Coast 2022",
+    "start_date": "Tue Mar 01 2022 00:00:00 GMT+0000 (GMT)",
+    "end_date": "Wed Mar 08 2022 00:00:00 GMT+0000 (GMT)",
+    "cities_to_visit": ["New York", "Boston", "New Jersey"]
+    }
+]

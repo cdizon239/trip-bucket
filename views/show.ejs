@@ -1,0 +1,10 @@
+<h1><%= trip.name %></h1>
+<p>
+    The trip <%= trip.name %> starts on <%= (trip.start_date).toDateString() %> and ends on <%= (trip.end_date).toDateString() %>
+</p>
+<a href="/trips/<%= trip.id %>/edit" class="btn btn-primary">Edit trip</a>
+<form action="/trips/<%= trip.id %>?_method=DELETE" method="post">
+    <input type="submit" value="Delete trip" class="btn btn-danger">
+</form>
+
+

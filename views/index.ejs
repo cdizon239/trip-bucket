@@ -1,4 +1,13 @@
-<h1>Hello world</h1>
-<div id='map' style='width: 400px; height: 300px;'></div>
-<script src="app.js"></script>
+<a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
 
+<% trips.forEach((trip) => { %>
+    <h1>
+        <a href="/trips/<%= trip.id %>">
+                <%= trip.name%>
+        </a>
+    </h1>
+
+    <% }) %>
+
+<div id='map' style='width: 100vw; height: 45vh;'></div>
+<script src="../app.js"></script>

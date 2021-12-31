@@ -1,0 +1,16 @@
+<h1>Edit Trip</h1>
+<form action="/trips/<%= trip.id%>?_method=PUT" method='post'>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" value="<%= trip.name%>">
+    <label for="startDate">Start date</label>
+    <input type="date" name="start_date" id="startDate" value="<%= trip.start_date%>">
+    <label for="endDate">End date</label>
+    <input type="date" name="end_date" id="endDate" value="<%= trip.end_date%>">
+    <label for="citiesToVisit">Cities to Visit</label>
+    <input type="text" name="cities_to_visit" id="citiesToVisit" value="<%= trip.cities_to_visit%>">
+    <input type="submit" value="Save Trip">
+</form>
+
+
+<div id='map' style='width: 100vw; height: 45vh;'></div>
+<script src="../app.js"></script>
