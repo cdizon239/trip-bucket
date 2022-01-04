@@ -14,7 +14,7 @@ const authRequired = (req,res,next) => {
 //  INDEX
 router.get('/', (req, res) => {
     Trip.find({}, (err, trips) => {
-        res.render('index', {trips})
+        res.render('index', {trips: JSON.stringify(trips)})
     })
 })
 
