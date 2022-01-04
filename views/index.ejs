@@ -3,7 +3,7 @@
         <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
         <% JSON.parse(trips).forEach((trip) => { %>
             <h4>
-                <a href="/trips/<%= trip.id %>">
+                <a href="/trips/<%= trip._id %>">
                         <%= trip.name%>
                 </a>
             </h4>
@@ -16,7 +16,7 @@
 <!-- CLIENT SIDE -->
 <script>
     // access the places in the database
-    let places= JSON.parse('<%- trips %>')
+    let trips= JSON.parse('<%- trips %>')
 
     //  make the map
     mapboxgl.accessToken  = '<%= process.env.MAPBOX_ACCESS_TOKEN %>'
@@ -28,10 +28,10 @@
     });
 
     //  add markers
-    places.forEach((place) => {
-        console.log(place)
-        if (place.places_to_visit.length > 0) {
-            place.places_to_visit.forEach((pin) => {
+    trips.forEach((trip) => {
+        // console.log(place)
+        if (trip.places_to_visit.length > 0) {
+            trip.places_to_visit.forEach((pin) => {
                 let marker = new mapboxgl.Marker({
                     color: "#F05441"
                 }).setLngLat([pin.long, pin.lat])
@@ -42,5 +42,3 @@
     })
     
 </script>
-
-

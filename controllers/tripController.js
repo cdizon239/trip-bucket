@@ -26,7 +26,7 @@ router.get('/new', (req, res) => {
 //  SHOW
 router.get('/:id', (req, res) => {
     Trip.findById(req.params.id, (err, trip) => {
-        res.render('show', {trip})
+        res.render('show', {trip: JSON.stringify(trip)})
     })
 })
 
