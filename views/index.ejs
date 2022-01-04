@@ -1,13 +1,10 @@
 <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
 
 <% trips.forEach((trip) => { %>
-    <h1>
+    <h4>
         <a href="/trips/<%= trip.id %>">
                 <%= trip.name%>
         </a>
-    </h1>
+    </h4>
 
     <% }) %>
-
-<div id='map' style='width: 100vw; height: 45vh;'></div>
-<script src="../app.js"></script>

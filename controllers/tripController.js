@@ -14,7 +14,7 @@ const authRequired = (req,res,next) => {
 //  INDEX
 router.get('/', (req, res) => {
     Trip.find({}, (err, trips) => {
-        res.render('index', {trips})
+        res.render('index', {layout: './layouts/sidebar.ejs', trips})
     })
 })
 
@@ -26,7 +26,7 @@ router.get('/new', (req, res) => {
 //  SHOW
 router.get('/:id', (req, res) => {
     Trip.findById(req.params.id, (err, trip) => {
-        res.render('show', {trip})
+        res.render('show', {layout: './layouts/sidebar.ejs',trip})
     })
 })
 

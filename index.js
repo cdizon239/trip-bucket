@@ -13,8 +13,10 @@ const session = require('express-session')
 // MIDDLEWARES
 app.use(expressLayouts)
 app.set('view engine', 'ejs')
+app.set('layout', './layouts/layout.ejs')
 app.set('port', process.env.PORT || 8000)
-app.use(express.static('app'))
+app.use(express.static('frontend'))
+app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
@@ -42,6 +44,9 @@ app.use((req,res,next) => {
 app.use('/sessions', sessionsController)
 app.use('/trips', tripController)
 
+app.get('/', (req, res) => {
+    res.render('home/home.ejs')
+})
 
 app.listen(app.get('port'), () => {
     console.log(`Magic is working in port ${app.get('port')}`)
