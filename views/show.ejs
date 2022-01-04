@@ -1,11 +1,27 @@
-<a href="/trips">Back to trips</a>
-<h1><%= trip.name %></h1>
-<p>
-    The trip <%= trip.name %> starts on <%= (trip.start_date).toDateString() %> and ends on <%= (trip.end_date).toDateString() %>
-</p>
-<a href="/trips/<%= trip.id %>/edit" class="btn btn-primary">Edit trip</a>
-<form action="/trips/<%= trip.id %>?_method=DELETE" method="post">
-    <input type="submit" value="Delete trip" class="btn btn-danger">
-</form>
+<div class="sidebar-view">
+    <div>
+        <a href="/trips">Back to trips</a>
+        <h1><%= trip.name %></h1>
+        <p>
+            The trip <%= trip.name %> starts on <%= (trip.start_date).toDateString() %> and ends on <%= (trip.end_date).toDateString() %>
+        </p>
+        <a href="/trips/<%= trip.id %>/edit" class="btn btn-primary">Edit trip</a>
+        <form action="/trips/<%= trip.id %>?_method=DELETE" method="post">
+            <input type="submit" value="Delete trip" class="btn btn-danger">
+        </form>
+    </div>
+<div id='map' style='width: 100%; height: 100vw;'>
+</div>
+</div>
+<script>
+    mapboxgl.accessToken  = '<%= process.env.MAPBOX_ACCESS_TOKEN %>'
+    const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 10 // starting zoom
+    });
+</script>
+
 
 

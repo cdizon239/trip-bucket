@@ -9,6 +9,21 @@
     "name": "East Coast 2022",
     "start_date": "Tue Mar 01 2022 00:00:00 GMT+0000 (GMT)",
     "end_date": "Wed Mar 08 2022 00:00:00 GMT+0000 (GMT)",
-    "cities_to_visit": ["New York", "Boston", "New Jersey"]
+    "cities_to_visit": ["New York", "Boston", "New Jersey"],
+    "places_to_visit": [
+        {
+            "lat": 40.7794,
+            "long": -73.9632,
+            "title": "The Metropolitan Museum of Art",
+            "rating": 5,
+            "description": "the largest art museum in the Western Hemisphere" 
+        },
+        { 
+            "lat": 40.7614,
+            "long": -73.9776,
+            "title": "The Museum of Modern Art",
+            "rating": 4,
+            "description": "one of the largest and most influential museums of modern art in the world" 
+        }]
     }
 ]

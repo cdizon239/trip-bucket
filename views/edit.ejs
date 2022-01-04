@@ -1,3 +1,5 @@
+<div class="sidebar-view">
+<div>
 <h1>Edit Trip</h1>
 <form action="/trips/<%= trip.id%>?_method=PUT" method='post'>
     <label for="name">Name</label>
@@ -10,7 +12,15 @@
     <input type="text" name="cities_to_visit" id="citiesToVisit" value="<%= trip.cities_to_visit%>">
     <input type="submit" value="Save Trip">
 </form>
-
-
-<div id='map' style='width: 100vw; height: 45vh;'></div>
-<script src="../app.js"></script>
+</div>
+<div id='map' style='width: 100%; height: 100vw;'>
+</div>
+<script>
+    mapboxgl.accessToken  = '<%= process.env.MAPBOX_ACCESS_TOKEN %>'
+    const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 10 // starting zoom
+    });
+</script>
