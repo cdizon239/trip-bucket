@@ -3,8 +3,8 @@ const mongoose = require('../db/connection')
 // MAKE SCHEMA
 const tripSchema = new mongoose.Schema({
     name: String,
-    start_date: Date,
-    end_date: Date,
+    start_date: String,
+    end_date: String,
     cities_to_visit: Array,
     places_to_visit: [{
         lat: Number,

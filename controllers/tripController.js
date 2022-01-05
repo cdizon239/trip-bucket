@@ -26,7 +26,7 @@ router.get('/new', (req, res) => {
 //  SHOW
 router.get('/:id', (req, res) => {
     Trip.findById(req.params.id, (err, trip) => {
-        res.render('show', {trip: JSON.stringify(trip)})
+        res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
     })
 })
 
@@ -54,7 +54,7 @@ router.put('/:id', (req, res) =>{
 
 router.get('/:id/edit', (req,res) => {
     Trip.findById(req.params.id, (err, trip) => {
-        res.render('edit', {trip})
+        res.render('edit', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
     })
 })
 

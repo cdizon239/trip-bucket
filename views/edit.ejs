@@ -1,26 +1,14 @@
-<div class="sidebar-view">
 <div>
-<h1>Edit Trip</h1>
-<form action="/trips/<%= trip.id%>?_method=PUT" method='post'>
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" value="<%= trip.name%>">
-    <label for="startDate">Start date</label>
-    <input type="date" name="start_date" id="startDate" value="<%= trip.start_date%>">
-    <label for="endDate">End date</label>
-    <input type="date" name="end_date" id="endDate" value="<%= trip.end_date%>">
-    <label for="citiesToVisit">Cities to Visit</label>
-    <input type="text" name="cities_to_visit" id="citiesToVisit" value="<%= trip.cities_to_visit%>">
-    <input type="submit" value="Save Trip">
-</form>
+    <h1>Edit Trip</h1>
+    <form action="/trips/<%= JSON.parse(trip)._id%>?_method=PUT" method='post'>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="<%= JSON.parse(trip).name%>">
+        <label for="startDate">Start date</label>
+        <input type="date" name="start_date" id="startDate" value="<%= JSON.parse(trip).start_date%>" format="mm/dd/yyyy">
+        <label for="endDate">End date</label>
+        <input type="date" name="end_date" id="endDate" value="<%= JSON.parse(trip).end_date%>" format="mm/dd/yyyy">
+        <label for="citiesToVisit">Cities to Visit</label>
+        <input type="text" name="cities_to_visit" id="citiesToVisit" value="<%= JSON.parse(trip).cities_to_visit%>">
+        <input type="submit" value="Save Trip">
+    </form>
 </div>
-<div id='map' style='width: 100%; height: 100vw;'>
-</div>
-<script>
-    mapboxgl.accessToken  = '<%= process.env.MAPBOX_ACCESS_TOKEN %>'
-    const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/streets-v11', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 10 // starting zoom
-    });
-</script>

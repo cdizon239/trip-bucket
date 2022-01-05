@@ -1,6 +1,7 @@
 <div class="sidebar-view">
     <div>
         <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
+        <h1>Your trips:</h1>
         <% JSON.parse(trips).forEach((trip) => { %>
             <h4>
                 <a href="/trips/<%= trip._id %>">
@@ -23,11 +24,11 @@
     const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
-    center: [-122.420679, 37.772537], // starting position [lng, lat]
-    zoom: 11 // starting zoom
+    center: [-74.0060, 40.000], // starting position [lng, lat]
+    zoom: 8 // starting zoom
     });
 
-    //  add markers
+    //  add markers fro mthe database
     trips.forEach((trip) => {
         // console.log(place)
         if (trip.places_to_visit.length > 0) {
@@ -35,10 +36,42 @@
                 let marker = new mapboxgl.Marker({
                     color: "#F05441"
                 }).setLngLat([pin.long, pin.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h1>${pin.title}</h1>`)) 
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${pin.title}</h4><p>${pin.description}</p>`)) 
                 .addTo(map);
             })
         }
     })
+    // Add zoom and rotation controls to the map.
+    const nav = new mapboxgl.NavigationControl();
+    map.addControl(nav, 'top-left');
+    // Add searchbox via geocoding api: src: https://docs.mapbox.com/help/tutorials/local-search-geocoding-api/
+    const geocoder = new MapboxGeocoder({
+        // Initialize the geocoder
+        accessToken: mapboxgl.accessToken, // Set the access token
+        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+    });
+    // Add the geocoder to the map
+    map.addControl(geocoder);
+    //  log data of search results
+    geocoder.on('result', (data) => {
+        console.log(data.result);
+    });
     
+    // let start, end, duration
+    // let clickThreshold = 400
+    // let marker
+
+    // map.on('mousedown', (event) => {
+    //     start = Date.now()
+    //     marker.remove()
+    // })
+
+    // map.on('mouseup', (event) => {
+    //         end = Date.now()
+    //         duration = (end - start) + 1
+    //         if (duration > clickThreshold) {
+    //             marker = new mapboxgl.Marker().setLngLat([event.lngLat.lng, event.lngLat.lat]).addTo(map)
+    //         }
+    //     })
+
 </script>

@@ -1,41 +1,15 @@
-<div class="sidebar-view">
-    <div>
-        <a href="/trips">Back to trips</a>
-        <h1><%= JSON.parse(trip).name %></h1>
-        <p>
-            The trip <%= JSON.parse(trip).name %> starts on <%= JSON.parse(trip).start_date %> and ends on <%= JSON.parse(trip).end_date %>
-        </p>
-        <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
-        <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
-            <input type="submit" value="Delete trip" class="btn btn-danger">
-        </form>
-    </div>
-<div id='map' style='width: 100%; height: 100vw;'>
+<div>
+    <a href="/trips">Back to trips</a>
+    <h1><%= JSON.parse(trip).name %></h1>
+    <p>
+        The trip <%= JSON.parse(trip).name %> starts on <%= JSON.parse(trip).start_date %> and ends on <%= JSON.parse(trip).end_date %>
+    </p>
+    <h3>Places to visit</h3>
+    <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
+        <p><%= place.title %></p>
+    <%})%>
+    <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
+    <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
+        <input type="submit" value="Delete trip" class="btn btn-danger">
+    </form>
 </div>
-</div>
-<script>
-    // parse trip
-    let trip = JSON.parse('<%- trip%>')
-
-    mapboxgl.accessToken  = '<%= process.env.MAPBOX_ACCESS_TOKEN %>'
-    const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/streets-v11', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 10 // starting zoom
-    });
-
-    //  add markers
-    if (trip.places_to_visit.length > 0) {
-        trip.places_to_visit.forEach((pin) => {
-            let marker = new mapboxgl.Marker({
-                color: "#F05441"
-            }).setLngLat([pin.long, pin.lat])
-            .setPopup(new mapboxgl.Popup().setHTML(`<h1>${pin.title}</h1>`)) 
-            .addTo(map);
-        })
-    }
-</script>
-
-
-
