@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet'/>
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css">
     <title>TripBucket</title>
 </head>
@@ -18,7 +21,7 @@
             <side><%- body %></side>
         </div>
         <main>
-            <div id='map' style='width: 100%; height: 100vw;'></div>
+            <div id='map' style='width: 100%; height: 100vh;'></div>
         </main>
     </div>
     <%- include('../partials/footer.ejs') %>
@@ -44,6 +47,41 @@
                 .addTo(map);
             })
         }
+
+        // Add searchbox via geocoding api: src: https://docs.mapbox.com/help/tutorials/local-search-geocoding-api/
+        const geocoder = new MapboxGeocoder({
+        // Initialize the geocoder
+        accessToken: mapboxgl.accessToken, // Set the access token
+        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+         });
+        // Add the geocoder to the map
+        map.addControl(geocoder);
+        //  log data of search results
+        geocoder.on('result', (data) => {
+            console.log(trip);
+
+            let placeToVisit = {
+                lat: (data.result.geometry.coordinates)[1],
+                long: (data.result.geometry.coordinates)[0],
+                title: data.result.text,
+            }
+            
+            new mapboxgl.Popup().setHTML(
+                `<h4>${data.result.text}</h4>
+                <p>${data.result.place_name}</p>
+                <h5>Add to a trip</h5>
+                <form action="/trips/${trip._id}/addPlace?_method=PATCH" method="POST">
+                    <input type="hidden" name="lat" value="${placeToVisit.lat}" />
+                    <input type="hidden" name="long" value="${placeToVisit.long}" />
+                    <input type="hidden" name="title" value="${placeToVisit.title}" />
+                    <label for="tripName">Choose a trip</label>
+                    <input type="text" name="name"/>
+                    <input type="submit" value="Add"> 
+                </form>
+                `)
+            .setLngLat(data.result.center).addTo(map)
+        });
+
     </script>
 </body>
 </html>

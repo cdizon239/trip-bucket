@@ -34,7 +34,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     console.log(req.body)
     Trip.create(req.body, (err, createdTrip) => {
-        res.redirect('/trips')
+        // res.render('/trips')
+        res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(createdTrip)})
     })
 })
 
@@ -45,17 +46,42 @@ router.delete('/:id', (req,res)=>{
     })
 })
 
-//  UPDATE
+router.get('/:id/edit', (req,res) => {
+    Trip.findById(req.params.id, (err, trip) => {
+        res.render('edit', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
+    })
+})
+
+//  Update places to visit of a given trip: Add a place
+router.patch('/:id/addPlace', (req, res) => {
+    console.log(req.body);
+    let {lat, long, title} = req.body
+    Trip.findByIdAndUpdate(req.params.id, { $push: {places_to_visit: {lat, long, title}}},
+            {new: true}, (err, updatedTrip) => {
+                console.log(updatedTrip)
+                res.redirect(`/trips/${updatedTrip._id}`)
+            }
+    )
+})
+
+//  Update places to visit of a given trip: Remove a place
+router.patch('/:id/removePlace', (req, res) => {
+    console.log(req.params.id);
+    let title = req.body
+    Trip.findByIdAndUpdate(req.params.id, { $pull: { places_to_visit: title }},
+            {new: true}, (err, updatedTrip) => {
+                console.log(updatedTrip)
+                res.redirect(`/trips/${updatedTrip.id}`)
+            }
+    )
+})
+
+//  UPDATE entire entry
 router.put('/:id', (req, res) =>{
     Trip.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedModel) => {
         res.redirect('/trips')
     })
 })
 
-router.get('/:id/edit', (req,res) => {
-    Trip.findById(req.params.id, (err, trip) => {
-        res.render('edit', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
-    })
-})
 
 module.exports = router
