@@ -60,20 +60,20 @@
             title: data.result.text,
         }
         
-        new mapboxgl.Popup().setHTML(
-            `<h4>${data.result.text}</h4>
-            <p>${data.result.place_name}</p>
-            <h5>Add to a trip</h5>
-            <form action="/trips/61d6542df90a1620f1204031?_method=PATCH" method="POST">
-                <input type="hidden" name="lat" value="${placeToVisit.lat}" />
-                <input type="hidden" name="long" value="${placeToVisit.long}" />
-                <input type="hidden" name="title" value="${placeToVisit.title}" />
-                <label for="tripName">Choose a trip</label>
-                <input type="text" name="name"/>
-                <input type="submit" value="Add"> 
-            </form>
-            `)
-        .setLngLat(data.result.center).addTo(map)
+        // new mapboxgl.Popup().setHTML(
+        //     `<h4>${data.result.text}</h4>
+        //     <p>${data.result.place_name}</p>
+        //     <h5>Add to a trip</h5>
+        //     <form action="/trips/61d6542df90a1620f1204031?_method=PATCH" method="POST">
+        //         <input type="hidden" name="lat" value="${placeToVisit.lat}" />
+        //         <input type="hidden" name="long" value="${placeToVisit.long}" />
+        //         <input type="hidden" name="title" value="${placeToVisit.title}" />
+        //         <label for="tripName">Choose a trip</label>
+        //         <input type="text" name="name"/>
+        //         <input type="submit" value="Add"> 
+        //     </form>
+        //     `)
+        // .setLngLat(data.result.center).addTo(map)
     });
     
     // let start, end, duration

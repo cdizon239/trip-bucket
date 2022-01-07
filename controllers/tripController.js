@@ -66,7 +66,7 @@ router.patch('/:id/addPlace', (req, res) => {
 
 //  Update places to visit of a given trip: Remove a place
 router.patch('/:id/removePlace', (req, res) => {
-    console.log(req.params.id);
+    console.log(req.body);
     let title = req.body
     Trip.findByIdAndUpdate(req.params.id, { $pull: { places_to_visit: title }},
             {new: true}, (err, updatedTrip) => {

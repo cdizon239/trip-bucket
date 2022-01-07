@@ -46,7 +46,39 @@
                 .setPopup(new mapboxgl.Popup().setHTML(`<h1>${pin.title}</h1><p>${pin.description}</p>`)) 
                 .addTo(map);
             })
+            
+            let coordinates = trip.places_to_visit.reduce((acc, obj) => {
+               if (!acc['long']) {
+                   acc['long'] = []
+               }
+               acc['long'].push(obj['long'])
+               
+               if (!acc['lat']) {
+                   acc['lat'] = []
+               }
+               acc['lat'].push(obj['lat'])
+               
+               return acc
+            }, {})
+
+            let newCenter = []
+            for (key in coordinates) {
+                console.log(coordinates[key]);
+                let avg = coordinates[key].reduce((prev, curr) => {
+                    prev = prev + curr
+                    return prev
+                }, 0) / coordinates[key].length
+                newCenter.push(avg)
+            }
+            map.flyTo({
+                center: newCenter
+            })
+
         }
+
+        // Add zoom and rotation controls to the map.
+        const nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'top-left');
 
         // Add searchbox via geocoding api: src: https://docs.mapbox.com/help/tutorials/local-search-geocoding-api/
         const geocoder = new MapboxGeocoder({
@@ -81,6 +113,23 @@
                 `)
             .setLngLat(data.result.center).addTo(map)
         });
+
+        let start, end, duration
+        let clickThreshold = 400
+        let marker
+
+        map.on('mousedown', (event) => {
+            start = Date.now()
+            marker.remove()
+        })
+
+        map.on('mouseup', (event) => {
+                end = Date.now()
+                duration = (end - start) + 1
+                if (duration > clickThreshold) {
+                    marker = new mapboxgl.Marker().setLngLat([event.lngLat.lng, event.lngLat.lat]).addTo(map)
+                }
+            })
 
     </script>
 </body>
