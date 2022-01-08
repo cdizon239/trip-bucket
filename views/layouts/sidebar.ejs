@@ -30,11 +30,11 @@
         let trip = JSON.parse('<%- trip%>')
     
         mapboxgl.accessToken  = '<%= process.env.MAPBOX_ACCESS_TOKEN %>'
+        
         const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 10 // starting zoom
+        zoom: 1 // starting zoom
         });
     
         //  add markers
@@ -71,7 +71,8 @@
                 newCenter.push(avg)
             }
             map.flyTo({
-                center: newCenter
+                center: newCenter,
+                zoom: 10
             })
 
         }
@@ -106,8 +107,6 @@
                     <input type="hidden" name="lat" value="${placeToVisit.lat}" />
                     <input type="hidden" name="long" value="${placeToVisit.long}" />
                     <input type="hidden" name="title" value="${placeToVisit.title}" />
-                    <label for="tripName">Choose a trip</label>
-                    <input type="text" name="name"/>
                     <input type="submit" value="Add"> 
                 </form>
                 `)

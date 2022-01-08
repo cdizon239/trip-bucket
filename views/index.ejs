@@ -22,13 +22,11 @@
     const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
-    center: [-74.0060, 40.000], // starting position [lng, lat]
-    zoom: 3 // starting zoom
+    zoom: 1// starting zoom
     });
 
     //  add markers fro mthe database
     trips.forEach((trip) => {
-        // console.log(place)
         if (trip.places_to_visit.length > 0) {
             trip.places_to_visit.forEach((pin) => {
                 let marker = new mapboxgl.Marker({

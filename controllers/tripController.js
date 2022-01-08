@@ -32,7 +32,6 @@ router.get('/:id', (req, res) => {
 
 //  POST to create new trip
 router.post('/', (req, res) => {
-    console.log(req.body)
     Trip.create(req.body, (err, createdTrip) => {
         // res.render('/trips')
         res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(createdTrip)})
@@ -58,7 +57,6 @@ router.patch('/:id/addPlace', (req, res) => {
     let {lat, long, title} = req.body
     Trip.findByIdAndUpdate(req.params.id, { $push: {places_to_visit: {lat, long, title}}},
             {new: true}, (err, updatedTrip) => {
-                console.log(updatedTrip)
                 res.redirect(`/trips/${updatedTrip._id}`)
             }
     )
@@ -70,7 +68,6 @@ router.patch('/:id/removePlace', (req, res) => {
     let title = req.body
     Trip.findByIdAndUpdate(req.params.id, { $pull: { places_to_visit: title }},
             {new: true}, (err, updatedTrip) => {
-                console.log(updatedTrip)
                 res.redirect(`/trips/${updatedTrip.id}`)
             }
     )
