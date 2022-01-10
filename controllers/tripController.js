@@ -26,7 +26,9 @@ router.get('/new', (req, res) => {
 //  SHOW
 router.get('/:id', (req, res) => {
     Trip.findById(req.params.id, (err, trip) => {
-        res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
+        let newStart = trip.start_date.toISOString().split('T')[0]
+        let newEnd = trip.end_date.toISOString().split('T')[0]
+        res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(trip), start_date: newStart, end_date: newEnd })
     })
 })
 
@@ -47,8 +49,11 @@ router.delete('/:id', (req,res)=>{
 
 router.get('/:id/edit', (req,res) => {
     Trip.findById(req.params.id, (err, trip) => {
-        res.render('edit', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
+        let newStart = trip.start_date.toISOString().split('T')[0]
+        let newEnd = trip.end_date.toISOString().split('T')[0]
+        res.render('edit', {layout: './layouts/sidebar', trip: JSON.stringify(trip), start_date: newStart, end_date: newEnd })
     })
+
 })
 
 //  Update places to visit of a given trip: Add a place

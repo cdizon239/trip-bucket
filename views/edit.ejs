@@ -5,9 +5,9 @@
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="<%= JSON.parse(trip).name%>">
         <label for="startDate">Start date</label>
-        <input type="date" name="start_date" id="startDate" value="<%= JSON.parse(trip).start_date%>" format="mm/dd/yyyy">
+        <input type="date" name="start_date" id="startDate" value="<%= start_date%>" format="mm/dd/yyyy">
         <label for="endDate">End date</label>
-        <input type="date" name="end_date" id="endDate" value="<%= JSON.parse(trip).end_date%>" format="mm/dd/yyyy">
+        <input type="date" name="end_date" id="endDate" value="<%= end_date%>" format="mm/dd/yyyy">
         <input type="submit" value="Save Trip">
     </form>
     <% JSON.parse(trip).places_to_visit.forEach((place) => { %>

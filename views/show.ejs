@@ -2,7 +2,7 @@
     <a href="/trips">Back to trips</a>
     <h1><%= JSON.parse(trip).name %></h1>
     <p>
-        The trip <%= JSON.parse(trip).name %> starts on <%= JSON.parse(trip).start_date %> and ends on <%= JSON.parse(trip).end_date %>
+        The trip <%= JSON.parse(trip).name %> starts on <%= start_date %> and ends on <%= end_date %>
     </p>
     <h3>Places to visit</h3>
     <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
