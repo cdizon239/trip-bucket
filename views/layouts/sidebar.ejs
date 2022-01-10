@@ -63,7 +63,6 @@
 
             let newCenter = []
             for (key in coordinates) {
-                console.log(coordinates[key]);
                 let avg = coordinates[key].reduce((prev, curr) => {
                     prev = prev + curr
                     return prev
@@ -112,6 +111,8 @@
                 `)
             .setLngLat(data.result.center).addTo(map)
         });
+
+        
 
         let start, end, duration
         let clickThreshold = 400

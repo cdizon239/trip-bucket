@@ -1,4 +1,5 @@
 const express = require('express')
+const ObjectID = require('mongodb').ObjectID
 const router = express.Router()
 const Trip = require('../models/trip')
 
@@ -69,9 +70,8 @@ router.patch('/:id/addPlace', (req, res) => {
 
 //  Update places to visit of a given trip: Remove a place
 router.patch('/:id/removePlace', (req, res) => {
-    console.log(req.body);
-    let title = req.body
-    Trip.findByIdAndUpdate(req.params.id, { $pull: { places_to_visit: title }},
+    let place_id = ObjectID(req.body.place_id)
+    Trip.findByIdAndUpdate(req.params.id, { $pull: { places_to_visit: {_id: place_id} }},
             {new: true}, (err, updatedTrip) => {
                 res.redirect(`/trips/${updatedTrip.id}`)
             }
