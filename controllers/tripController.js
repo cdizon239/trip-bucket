@@ -36,8 +36,9 @@ router.get('/:id', (req, res) => {
 //  POST to create new trip
 router.post('/', (req, res) => {
     Trip.create(req.body, (err, createdTrip) => {
-        // res.render('/trips')
-        res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(createdTrip)})
+        let newStart = createdTrip.start_date.toISOString().split('T')[0]
+        let newEnd = createdTrip.end_date.toISOString().split('T')[0]
+        res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(createdTrip), start_date: newStart, end_date: newEnd})
     })
 })
 
