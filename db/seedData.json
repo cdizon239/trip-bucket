@@ -7,8 +7,8 @@
     },
     {
     "name": "East Coast 2022",
-    "start_date": "2022-03-01",
-    "end_date": "2022-03-08",
+    "start_date": "2022-03-01T00:00:00.000Z",
+    "end_date": "2022-03-08T00:00:00.000Z",
     "cities_to_visit": ["New York", "Boston", "New Jersey"],
     "places_to_visit": [
         {
