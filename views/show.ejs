@@ -7,7 +7,10 @@
     <h3>Places to visit</h3>
     <div class="placesList">
     <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
-        <p class="place"><%= place.title %></p>
+        <div class="place">
+            <p class="place-title"><%= place.title %></p>
+            <p class="place-name"><%= place.place_name %></p>
+        </div>
         <button class="go-to-place">Directions</button>
     <%})%>
     </div>

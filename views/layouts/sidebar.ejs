@@ -72,7 +72,6 @@
             })
 
             trip.places_to_visit.forEach((pin) => {
-                console.log(pin);
                 let marker = new mapboxgl.Marker({
                     color: "#F05441"
                 }).setLngLat([pin.long, pin.lat])
@@ -131,7 +130,33 @@
 
         map.on('load', () => {   
                 
-            navigator.geolocation.getCurrentPosition(
+            // EVENT HANDLERS
+            let zoomIntoClickedPlace = (e) => {
+                let placeTitle = e.currentTarget.querySelector('.place-title').innerText
+                let placeName = e.currentTarget.querySelector('.place-name').innerText
+                console.log(placeTitle, placeName);
+                
+                let placeClicked = trip.places_to_visit.filter((place) => {
+                        return place.title === placeTitle && place.place_name === placeName
+                })[0]
+
+                map.flyTo({
+                    center: [placeClicked.long, placeClicked.lat],
+                    zoom: 15
+                })
+            }
+
+            let getDirectionsFromCurrentLocation = (e) => {
+                let placeToGoTitle = e.currentTarget.previousElementSibling.querySelector('.place-title').innerText
+                let placeToGoName = e.currentTarget.previousElementSibling.querySelector('.place-name').innerText
+
+                let placeToGo =  trip.places_to_visit.filter((place) => {
+                        return place.title === placeToGoTitle && place.place_name === placeToGoName
+                })[0]
+                mapDirections.setDestination([placeToGo.long, placeToGo.lat])
+
+                //  set current location as origin
+                navigator.geolocation.getCurrentPosition(
                 (position) => {
                     mapDirections.setOrigin([position.coords.longitude, position.coords.latitude])
                 }, 
@@ -142,32 +167,11 @@
                     enableHighAccuracy: true
                 }
             )
+            }
 
-            // EVENT HANDLERS
-            let clickPlace = (e) => {
-                //  currently assuming unique place name
-                if(e.target.classList.contains('place')) {
-                    console.log(e.target);
-                    let placeClickedName = e.target.innerText
-                    let placeClicked = trip.places_to_visit.filter((place) => {
-                        return place.title === placeClickedName
-                    })[0]
-                    map.flyTo({
-                        center: [placeClicked.long, placeClicked.lat],
-                        zoom: 15
-                    })
-                } else if ( e.target.classList.contains('go-to-place')) {
-                    let placeToGo = e.target.previousElementSibling.innerText
-                    let placeDestination = trip.places_to_visit.filter((place) => {
-                        return place.title === placeToGo
-                    })[0]
-                    mapDirections.setDestination([placeDestination.long, placeDestination.lat])
-                }
-
-        }
-
-        // EVENT LISTENERS
-        document.querySelector('.placesList').addEventListener('click', clickPlace)
+            // EVENT LISTENERS
+            document.querySelector('.place').addEventListener('click', zoomIntoClickedPlace)
+            document.querySelector('.go-to-place').addEventListener('click', getDirectionsFromCurrentLocation)
 
         })
 
