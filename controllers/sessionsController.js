@@ -19,12 +19,20 @@ router.post('/register', async (req, res, next) => {
         if (req.body.password === req.body.verifyPassword) {
             //  passwords must match
             const usernameToRegister = req.body.username
-            const userExists = await User.findOne({ username: usernameToRegister })
-            if (userExists) {
+            const useremailToRegister = req.body.useremail
+            const usernameExists = await User.findOne({ username: usernameToRegister })
+            const useremailExists = await User.findOne({ useremail: useremailToRegister })
+
+            if (usernameExists) {
                 req.session.message = "Username already taken"
                 console.log(req.session.message)
-                // res.redirect('/sessions/register')
-            } else {
+                res.redirect('/sessions/register')
+            } else if (useremailExists) {
+                req.session.message = "Useremail already registered"
+                console.log(req.session.message)
+                res.redirect('/sessions/register')
+            }
+            else {
                 //  encrypt the password with bcrypt
                 const salt = bcrypt.genSaltSync(11)
                 const hashedPassword = bcrypt.hashSync(req.body.password, salt)
@@ -36,7 +44,7 @@ router.post('/register', async (req, res, next) => {
                 
                 const createdUser = await User.create({useremail, username, password})
                 req.session.username = createdUser.username
-                req.session.loggedin = true
+                req.session.loggedIn = true
                 req.session.useremail = createdUser.useremail
                 
                 res.redirect('/trips')

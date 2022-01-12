@@ -29,13 +29,14 @@ app.use(session({
 //  CUSTOM MIDDLEWARE
 app.use((req,res,next) => {
     res.locals.username = req.session.username
+    res.locals.useremail = req.session.useremail
     res.locals.loggedIn = req.session.loggedIn
     next()
 })
 
 app.use((req,res,next) => {
     res.locals.message = req.session.message
-    req.session.message = ""
+    req.session.message = null
     //  after each request, we reset the message
     next()
 })

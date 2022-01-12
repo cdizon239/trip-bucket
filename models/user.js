@@ -3,12 +3,12 @@ const mongoose = require('../db/connection')
 const UserSchema = new mongoose.Schema({
     useremail: {
         type: String,
-        // unique: true,
+        unique: true,
         require: true,
     },
     username: {
         type: String,
-        // unique: true,
+        unique: true,
         require: true,
     },
     password: {

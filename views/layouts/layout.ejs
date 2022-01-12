@@ -20,6 +20,9 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
+    <% if (username) {%>
+        <p>Welcome, <%= username%></p>
+    <%}%>
     <%- body %> 
     <%- include('../partials/footer.ejs') %>
 
