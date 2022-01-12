@@ -18,10 +18,12 @@ router.post('/register', async (req, res, next) => {
     try {
         if (req.body.password === req.body.verifyPassword) {
             //  passwords must match
-            const usernameToRegister = req.body.usernameToRegister
+            const usernameToRegister = req.body.username
             const userExists = await User.findOne({ username: usernameToRegister })
             if (userExists) {
-                res.send('Username already taken')
+                req.session.message = "Username already taken"
+                console.log(req.session.message)
+                // res.redirect('/sessions/register')
             } else {
                 //  encrypt the password with bcrypt
                 const salt = bcrypt.genSaltSync(11)
@@ -29,13 +31,21 @@ router.post('/register', async (req, res, next) => {
 
                 //  reassign to only store hashedPassword
                 req.body.password = hashedPassword
+
+                let {useremail, username, password} = req.body
                 
-                const createdUser = await User.create(req.body)
+                const createdUser = await User.create({useremail, username, password})
                 req.session.username = createdUser.username
                 req.session.loggedin = true
+                req.session.useremail = createdUser.useremail
                 
                 res.redirect('/trips')
             }
+        } else {
+            req.session.message = "Passwords must match"
+            console.log(req.session.message)
+
+            res.redirect('/sessions/register')
         }
     } catch (err) {
         next(err)
@@ -50,7 +60,6 @@ router.post('/login', async (req, res, next) => {
     //  asynce await best practice to wrap in try catch
     try {
         const userToLogin = await User.findOne({ username: req.body.username})
-
         if (userToLogin) {
             //  we need to check if the passwords match
             //  we do this with bcrypt.compareSync
@@ -68,7 +77,9 @@ router.post('/login', async (req, res, next) => {
             }
         } else {
             req.session.message = "Invalid username or password"
+
             res.redirect('/sessions/login')
+
         }
     } catch (err) {
         next(err)
@@ -76,9 +87,8 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.get('/logout', (req, res) => {
-
     req.session.destroy()
-    res.redirect('/sessions/login')
+    res.redirect('/trips')
 })
 
 module.exports = router

@@ -41,7 +41,7 @@
         zoom: 1
         });
     
-        //  add markers
+        //  add markers on the map
         if (trip.places_to_visit.length > 0) {            
             //  center map on ag long lat center across all pins
             let coordinates = trip.places_to_visit.reduce((acc, obj) => {
@@ -124,9 +124,6 @@
         })
         map.addControl(mapDirections, 'top-left')
 
-        //  add geolocation
-
-
 
         map.on('load', () => {   
                 
@@ -155,7 +152,7 @@
                 })[0]
                 mapDirections.setDestination([placeToGo.long, placeToGo.lat])
 
-                //  set current location as origin
+                //  set current location as origin using navigator geolocation API
                 navigator.geolocation.getCurrentPosition(
                 (position) => {
                     mapDirections.setOrigin([position.coords.longitude, position.coords.latitude])

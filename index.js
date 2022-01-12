@@ -41,8 +41,9 @@ app.use((req,res,next) => {
 })
 
 
-app.use('/sessions', sessionsController)
 app.use('/trips', tripController)
+app.use('/sessions', sessionsController)
+
 
 app.get('/', (req, res) => {
     res.render('home/home.ejs')

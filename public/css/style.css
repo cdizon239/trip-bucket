@@ -2,3 +2,7 @@
     display: grid;
     grid-template-columns: 1.5fr 4fr;
 }
+
+p {
+    color: black;
+}
