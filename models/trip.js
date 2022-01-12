@@ -11,7 +11,7 @@ const tripSchema = new mongoose.Schema({
         long: Number,
         title: String,
         rating: Number,
-        description: String
+        place_name: String
     }],
     owner: {
         type: mongoose.Schema.Types.ObjectId,

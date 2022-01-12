@@ -61,8 +61,8 @@ router.get('/:id/edit', (req,res) => {
 //  Update places to visit of a given trip: Add a place
 router.patch('/:id/addPlace', (req, res) => {
     console.log(req.body);
-    let {lat, long, title} = req.body
-    Trip.findByIdAndUpdate(req.params.id, { $push: {places_to_visit: {lat, long, title}}},
+    let {lat, long, title, place_name} = req.body
+    Trip.findByIdAndUpdate(req.params.id, { $push: {places_to_visit: {lat, long, title, place_name}}},
             {new: true}, (err, updatedTrip) => {
                 res.redirect(`/trips/${updatedTrip._id}`)
             }
