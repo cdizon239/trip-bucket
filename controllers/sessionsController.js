@@ -16,7 +16,10 @@ router.get('/register', (req, res) => {
 //  POST: create an account
 router.post('/register', async (req, res, next) => {
     try {
-        if (req.body.password === req.body.verifyPassword) {
+        if (!req.body.useremail || !req.body.username || !req.body.password || !req.body.verifyPassword) {
+            req.session.message = "All fields are required to register"
+            res.redirect('/sessions/register')
+        } else if (req.body.password === req.body.verifyPassword) {
             //  passwords must match
             const usernameToRegister = req.body.username
             const useremailToRegister = req.body.useremail
@@ -25,11 +28,9 @@ router.post('/register', async (req, res, next) => {
 
             if (usernameExists) {
                 req.session.message = "Username already taken"
-                console.log(req.session.message)
                 res.redirect('/sessions/register')
             } else if (useremailExists) {
                 req.session.message = "Useremail already registered"
-                console.log(req.session.message)
                 res.redirect('/sessions/register')
             }
             else {
@@ -51,8 +52,6 @@ router.post('/register', async (req, res, next) => {
             }
         } else {
             req.session.message = "Passwords must match"
-            console.log(req.session.message)
-
             res.redirect('/sessions/register')
         }
     } catch (err) {
@@ -85,7 +84,6 @@ router.post('/login', async (req, res, next) => {
             }
         } else {
             req.session.message = "Invalid username or password"
-
             res.redirect('/sessions/login')
 
         }
