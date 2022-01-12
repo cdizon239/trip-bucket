@@ -26,7 +26,9 @@ app.use(session({
     saveUninitialized: false,
 }))
 
-//  CUSTOM MIDDLEWARE
+//  CUSTOM MIDDLEWARES
+
+//  session middleware
 app.use((req,res,next) => {
     res.locals.username = req.session.username
     res.locals.useremail = req.session.useremail
@@ -40,6 +42,15 @@ app.use((req,res,next) => {
     //  after each request, we reset the message
     next()
 })
+
+//  middleware, require auth
+const authRequired = (req, res, next) => {
+    if (loggedIn) {
+        next()
+    } else {
+        res.redirect('/sessions/login')
+    }
+}
 
 
 app.use('/trips', tripController)
