@@ -167,8 +167,17 @@
             }
 
             // EVENT LISTENERS
-            document.querySelector('.place').addEventListener('click', zoomIntoClickedPlace)
-            document.querySelector('.go-to-place').addEventListener('click', getDirectionsFromCurrentLocation)
+        
+            let places = document.querySelectorAll('.place')
+            places.forEach((place) => {
+                place.addEventListener('click', zoomIntoClickedPlace)
+            })
+
+            let directionsButtons = document.querySelectorAll('.go-to-place')
+            directionsButtons.forEach((button) => {
+                button.addEventListener('click', getDirectionsFromCurrentLocation)
+            })
+            
 
         })
 

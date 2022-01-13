@@ -1,12 +1,17 @@
 <div class="sidebar-view">
     <div>
-        <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
         <h3>Your trips:</h3>
-        <% JSON.parse(trips).forEach((trip) => { %>
-                <a  class="btn" href="/trips/<%= trip._id %>">
-                        <%= trip.name%>
-                </a>
-        <% }) %>
+        <%if (userId) {%>
+            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
+            <% JSON.parse(trips).forEach((trip) => { %>
+                    <a  class="btn" href="/trips/<%= trip._id %>">
+                            <%= trip.name%>
+                    </a>
+            <% }) %>
+        <% } else { %>    
+            <p>No trips listed yet</p>
+            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
+        <% }%>    
     </div>
     <div id='map' style='width: 100%; height: 100vh;'>
     </div>

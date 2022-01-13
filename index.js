@@ -33,6 +33,7 @@ app.use((req,res,next) => {
     res.locals.username = req.session.username
     res.locals.useremail = req.session.useremail
     res.locals.loggedIn = req.session.loggedIn
+    res.locals.userId = req.session.userId
     next()
 })
 
@@ -53,8 +54,8 @@ const authRequired = (req, res, next) => {
 }
 
 
-app.use('/trips', tripController)
 app.use('/sessions', sessionsController)
+app.use('/trips', tripController)
 
 
 app.get('/', (req, res) => {

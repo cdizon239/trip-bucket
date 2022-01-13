@@ -43,12 +43,15 @@ router.post('/register', async (req, res, next) => {
 
                 let {useremail, username, password} = req.body
                 
-                const createdUser = await User.create({useremail, username, password})
-                req.session.username = createdUser.username
-                req.session.loggedIn = true
-                req.session.useremail = createdUser.useremail
-                
-                res.redirect('/trips')
+                const createdUser = await User.create({useremail, username, password}, (err, userCreated) => {
+                    req.session.username = userCreated.username
+                    req.session.loggedIn = true
+                    req.session.useremail = userCreated.useremail
+                    req.session.userId = userCreated.id
+                    
+                    res.redirect('/trips')
+                })
+
             }
         } else {
             req.session.message = "Passwords must match"
@@ -77,6 +80,8 @@ router.post('/login', async (req, res, next) => {
             if (validPassword) {
                 req.session.username = userToLogin.username
                 req.session.loggedIn = true
+                req.session.useremail = userToLogin.useremail
+                req.session.userId = userToLogin.id
                 res.redirect('/trips')
             } else {
                 req.session.message = "Invalid username or password"
