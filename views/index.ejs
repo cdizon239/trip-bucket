@@ -3,15 +3,29 @@
         <h3>Your trips:</h3>
         <%if (userId) {%>
             <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
-            <% JSON.parse(trips).forEach((trip) => { %>
+            <% let tripsList = JSON.parse(trips) %>
+            <% tripsList =  tripsList.sort((a,b) => new Date(b.start_date) - new Date(a.start_date)) %>
+            <% let groupTripsByYear = tripsList.reduce((newData, trip) => { %>
+                <% let key = trip.start_date ? new Date(trip['start_date']).getFullYear() : 'Unscheduled' %>
+                <% if(!newData[key]) { %> 
+                    <% newData[key] = [] %>
+                <% } %> 
+                <% newData[key].push(trip) %>
+                <% return newData %> 
+            <% }, {}) %> 
+            <% for (year in groupTripsByYear) {%>
+                <h4><%= year%></h4>
+                <%(groupTripsByYear[year]).forEach((trip) => { %>
                     <a  class="btn" href="/trips/<%= trip._id %>">
-                            <%= trip.name%>
+                        <%= trip.name %>
                     </a>
-            <% }) %>
-        <% } else { %>    
-            <p>No trips listed yet</p>
-            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
-        <% }%>    
+                <% }) %>
+
+            <% } %>
+        <% } %>
+            
+            
+   
     </div>
     <div id='map' style='width: 100%; height: 100vh;'>
     </div>
@@ -55,8 +69,6 @@
     map.addControl(geocoder);
     //  log data of search results
     geocoder.on('result', (data) => {
-        console.log(trips);
-
         let placeToVisit = {
             lat: (data.result.geometry.coordinates)[1],
             long: (data.result.geometry.coordinates)[0],
