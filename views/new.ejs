@@ -8,7 +8,8 @@
             <input type="date" name="start_date" id="startDate">
             <label for="endDate">End date</label>
             <input type="date" name="end_date" id="endDate">
-            <input type="submit" value="Add New Trip">
+            <p id="dateWarning"></p>
+            <input type="submit" value="Add New Trip" class="btn btn-primary" id="submit">
         </form>
     </div>
     <div id='map' style='width: 100%; height: 100vw;'>
@@ -22,4 +23,17 @@ style: 'mapbox://styles/mapbox/streets-v11', // style URL
 center: [-74.5, 40], // starting position [lng, lat]
 zoom: 10 // starting zoom
 });
+
+let endDateControl = document.querySelector('#endDate')
+endDateControl.addEventListener('change', () => {
+    let startDateValue= document.querySelector('#startDate').value
+    let endDateValue = endDateControl.value
+    if (startDateValue > endDateValue) {
+        document.querySelector('#dateWarning').innerText = 'End date should not be earlier than trip start date'
+        document.getElementById('submit').disabled = true
+    } else {
+        document.querySelector('#dateWarning').innerText = ''
+    }
+})
+
 </script>

@@ -8,7 +8,8 @@
         <input type="date" name="start_date" id="startDate" value="<%= start_date%>" format="mm/dd/yyyy">
         <label for="endDate">End date</label>
         <input type="date" name="end_date" id="endDate" value="<%= end_date%>" format="mm/dd/yyyy">
-        <input type="submit" value="Save Trip">
+        <p id="dateWarning"></p>
+        <input type="submit" class="btn btn-primary" value="Save Trip" id="submit">
     </form>
     <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
         <p><%= place.title %></p>
@@ -24,3 +25,18 @@
         </form>
     <%})%>
 </div>
+
+<script>
+    let endDateControl = document.querySelector('#endDate')
+    endDateControl.addEventListener('change', () => {
+        let startDateValue= document.querySelector('#startDate').value
+        let endDateValue = endDateControl.value
+        if (startDateValue > endDateValue) {
+        document.querySelector('#dateWarning').innerText = 'End date should not be earlier than trip start date'
+        document.getElementById('submit').disabled = true
+        } else {
+            document.querySelector('#dateWarning').innerText = ''
+        }
+    })
+    
+</script>

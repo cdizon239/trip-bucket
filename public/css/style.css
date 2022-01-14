@@ -17,3 +17,11 @@ p {
 .trips-list {
     display: block;
 }
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}

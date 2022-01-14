@@ -26,6 +26,7 @@
     "express-session": "^1.17.2",
     "mapbox-gl": "^2.6.1",
     "method-override": "^3.0.0",
-    "mongoose": "^6.1.4"
+    "mongoose": "^6.1.4",
+    "nodemailer": "^6.7.2"
   }
 }

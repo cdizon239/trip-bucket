@@ -4,6 +4,10 @@
     <p>
         The trip <%= JSON.parse(trip).name %> starts on <%= start_date %> and ends on <%= end_date %>
     </p>
+    <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
+    <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
+        <input type="submit" value="Delete trip" class="btn btn-danger">
+    </form>
     <h3>Places to visit</h3>
     <div class="placesList">
     <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
@@ -14,8 +18,5 @@
         <button class="go-to-place">Directions</button>
     <%})%>
     </div>
-    <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
-    <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
-        <input type="submit" value="Delete trip" class="btn btn-danger">
-    </form>
+
 </div>
