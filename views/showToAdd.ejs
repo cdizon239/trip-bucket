@@ -1,0 +1,18 @@
+<div>
+    <a href="/trips">Cancel</a>
+    <h1><%= JSON.parse(trip).name %></h1>
+    <h3>Places to visit</h3>
+    <div class="placesList">
+    <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
+        <div class="place">
+            <p class="place-title"><%= place.title %></p>
+            <p class="place-name"><%= place.place_name %></p>
+        </div>
+        <button class="go-to-place">Directions</button>
+    <%})%>
+    </div>
+    <form action="/trips/addSuggestedTrip" method="post">
+        <input type="hidden" name="suggestedTripId" value="<%= JSON.parse(trip)._id %>">
+        <input type="submit" value="Add to my trips" class="btn btn-primary">
+    </form>
+</div>

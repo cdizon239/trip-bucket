@@ -15,9 +15,14 @@ const authRequired = (req,res,next) => {
 
 //  INDEX
 router.get('/', (req, res) => {
+    let suggestedTrips
+    Trip.find({owner: {$exists: false}}, (err, trips) => {
+        suggestedTrips = trips
+        console.log(suggestedTrips)
+    })
     let tripsByUser = User.findById(req.session.userId, (err, user) => {
         Trip.find({owner: ObjectID(req.session.userId)}, (err, trips) => {
-            res.render('index', {trips: JSON.stringify(trips)})
+            res.render('index', {trips: JSON.stringify(trips), suggestedTrips: suggestedTrips})
         })
     })    
 })
@@ -28,6 +33,15 @@ router.get('/new', authRequired, (req, res) => {
 })
 
 //  SHOW
+//  show a "Suggested Trip" page
+router.get('/toAdd/:id',  (req, res) => {
+    Trip.findById(req.params.id, (err, trip) => {
+        res.render('showToAdd', {layout: './layouts/sidebar', trip: JSON.stringify(trip)})
+    })
+})
+
+
+//  show "Your Trips" page
 router.get('/:id',  (req, res) => {
     Trip.findById(req.params.id, (err, trip) => {
         let newStart = trip.start_date ? trip.start_date.toISOString().split('T')[0] : ''
@@ -37,24 +51,31 @@ router.get('/:id',  (req, res) => {
 })
 
 //  POST to create new trip
-router.post('/', (req, res) => {
+router.post('/', authRequired, (req, res) => {
     User.findById(req.session.userId, (err, user) => {
-        console.log(user)
 
         let newTrip = {
             ...req.body,
             owner: ObjectID(req.session.userId)
         }
-
         //  create
         Trip.create(newTrip, (err, createdTrip) => {
-            console.log(createdTrip)
-            let newStart = createdTrip.start_date ? createdTrip.start_date.toISOString().split('T')[0] : ''
-            let newEnd = createdTrip.end_date ? createdTrip.end_date.toISOString().split('T')[0] : '' 
+            let newStart = !!createdTrip.start_date ? createdTrip.start_date.toISOString().split('T')[0] : null
+            let newEnd = !!createdTrip.end_date ? createdTrip.end_date.toISOString().split('T')[0] : null
             res.render('show', {layout: './layouts/sidebar', trip: JSON.stringify(createdTrip), start_date: newStart, end_date: newEnd})
         })
 
+    })
+    
+})
 
+router.post('/addSuggestedTrip', (req, res) => {
+    Trip.findById(req.body.suggestedTripId, (err, trip) => {
+        trip._id = ObjectID()
+        trip.owner = ObjectID(req.session.userId)
+        trip.isNew = true
+        trip.save()
+        res.redirect('/trips')
     })
     
 })
@@ -102,6 +123,7 @@ router.put('/:id', (req, res) =>{
         res.redirect('/trips')
     })
 })
+
 
 
 module.exports = router

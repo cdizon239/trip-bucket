@@ -22,10 +22,18 @@
                 <% }) %>
 
             <% } %>
+        <% } else { %>
+            <p>No trips listed yet</p>
+            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
         <% } %>
-            
-            
-   
+
+        <h3>Suggested trips</h3>
+        <% suggestedTrips.forEach((trip) => { %>
+            <a  class="btn" href="/trips/toAdd/<%= trip._id %>">
+                <%= trip.name %>
+            </a>
+        <% }) %>
+
     </div>
     <div id='map' style='width: 100%; height: 100vh;'>
     </div>
