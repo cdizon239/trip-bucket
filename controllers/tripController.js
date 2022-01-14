@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
     })
     let tripsByUser = User.findById(req.session.userId, (err, user) => {
         Trip.find({owner: ObjectID(req.session.userId)}, (err, trips) => {
-            res.render('index', {trips: JSON.stringify(trips), suggestedTrips: JSON.parse(JSON.stringify(suggestedTrips))})
+            res.render('index', {trips: JSON.stringify(trips), suggestedTrips: JSON.stringify(suggestedTrips)})
         })
     })    
 })

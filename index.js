@@ -8,6 +8,9 @@ const tripController = require('./controllers/tripController')
 const sessionsController = require('./controllers/sessionsController')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const nodemailer = require('nodemailer')
+const emailReminder = require('./controllers/email')
+
 
 
 // MIDDLEWARES
@@ -56,10 +59,15 @@ const authRequired = (req, res, next) => {
 
 app.use('/sessions', sessionsController)
 app.use('/trips', tripController)
+app.use(emailReminder)
 
 
 app.get('/', (req, res) => {
     res.render('home/home.ejs')
+})
+
+app.post('/sendEmail', (req, res) => {
+    emailReminder(res)
 })
 
 app.listen(app.get('port'), () => {
