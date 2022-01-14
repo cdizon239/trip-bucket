@@ -99,7 +99,7 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/logout', (req, res) => {
     req.session.destroy()
-    res.redirect('/trips')
+    res.redirect('/')
 })
 
 module.exports = router
