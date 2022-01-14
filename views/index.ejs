@@ -16,7 +16,7 @@
             <% for (year in groupTripsByYear) {%>
                 <h4><%= year%></h4>
                 <%(groupTripsByYear[year]).forEach((trip) => { %>
-                    <a  class="btn" href="/trips/<%= trip._id %>">
+                    <a  class="btn trips-list" href="/trips/<%= trip._id %>">
                         <%= trip.name %>
                     </a>
                 <% }) %>
@@ -29,7 +29,7 @@
 
         <h3>Suggested trips</h3>
         <% suggestedTrips.forEach((trip) => { %>
-            <a  class="btn" href="/trips/toAdd/<%= trip._id %>">
+            <a  class="btn trips-list" href="/trips/toAdd/<%= trip._id %>">
                 <%= trip.name %>
             </a>
         <% }) %>
