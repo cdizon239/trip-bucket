@@ -22,7 +22,12 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.set('trust proxy', 1);
 app.use(session({
+    cookie: {
+        secure: true,
+        maxAge: 6000
+    },
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
