@@ -2,8 +2,7 @@
 const mongoose = require('mongoose')
 
 //  CONNECT
-const MONGODB_URI = process.env.MONGODB_URI
-console.log(MONGODB_URI)
+const MONGODB_URI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://localhost:27017/trip-bucket'
 
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
