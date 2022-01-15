@@ -15,16 +15,18 @@
                     <% return newData %> 
                 <% }, {}) %> 
                 <% for (year in groupTripsByYear) {%>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                            <h3><%= year%></h3>
-                        </button>
-                        <div class="collapse show" id="home-collapse" style="">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <%(groupTripsByYear[year]).forEach((trip) => { %>
-                                    <li><a class="link-dark rounded" href="/trips/<%= trip._id %>"><%= trip.name %></a>
-                                <% }) %>
-                            </ul>
+                    <li class="mb-1 card">
+                        <div class="card-body">
+                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                                <h3><%= year%></h3>
+                            </button>
+                            <div class="collapse show" id="home-collapse" style="">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                                    <%(groupTripsByYear[year]).forEach((trip) => { %>
+                                        <li><a class="link-dark rounded" href="/trips/<%= trip._id %>"><%= trip.name %></a>
+                                    <% }) %>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 <% } %>

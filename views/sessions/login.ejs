@@ -1,20 +1,20 @@
 <div class="form-page text-center">
     <div class="custom-form card">
         <div class="card-body">
-            <form action="/sessions/login" method="post">
+            <form action="/sessions/login" method="post" _lpchecked=1>
                 <img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo">
                 <h3>Login to plan your adventures!</h3>
                 <%if (message) {%>
                     <p><%= message%></p>
                 <%}%>   
-                <fieldset>
+                <div class="form-floating">
                     <!-- label "for" points to "id" of input -->
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username">
-                </fieldset>
-                <fieldset>
+                    <input type="text" class="form-control" id="username" name="username" place>
+                    <label for="username">Username</label>
+                </div>
+                <fieldset class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password">
                 </fieldset>
                 <input type="submit" value="Log in" class="btn btn-lg btn-success">
             </form>
