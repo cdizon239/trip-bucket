@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Trip = require('../models/trip')
 const User = require('../models/user')
 const ObjectID = require('mongodb').ObjectID
@@ -55,4 +57,4 @@ function emailReminder() {
     })
 }
 
-module.exports = emailReminder
+emailReminder()

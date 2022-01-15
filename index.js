@@ -9,8 +9,6 @@ const sessionsController = require('./controllers/sessionsController')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const nodemailer = require('nodemailer')
-const emailReminder = require('./utils/email')
-
 
 // MIDDLEWARES
 app.use(expressLayouts)
