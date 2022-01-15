@@ -1,16 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <% let home = loggedIn ? '/trips' : '/' %>
-    <a class="navbar-brand mb-0 h1" href="<%= home %>"><img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo"></a>
-    <ul class="navbar-nav mr-auto">
-        <% if (loggedIn) {%>
-            <li class="nav-item">Trips</li>
-            <li class="nav-item">Places</li>
-            <li class="nav-item">Profile</li>
-            <li><a href="/sessions/logout"> Log Out</a></li>
-        <%} else {%>   
-            <li><a href="/sessions/register"> Register</a></li>
-            <li><a href="/sessions/login"> Log In</a></li> 
-        <%}%>
+<header class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+        <% let home = loggedIn ? '/trips' : '/' %>
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a class="navbar-brand mb-0 h1" href="<%= home %>"><img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo"></a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/trips" class="nav-link px-2">Trips</a></li>
+                <li><a href="/" class="nav-link px-2">About</a></li>
+                <% if (loggedIn) {%>
+                    <div class="text-end">
+                        <a class="btn btn-primary me-2" href="/sessions/logout"> Logout</a>
+                    </div>
+                
+                <%} else {%>   
+                    <li>        
+                        <div class="text-end">
+                            <a class="btn btn-success me-2" href="/sessions/login"> Login</a>
+                            <a class="btn btn-primary me-2" href="/sessions/register"> Register</a>
+                        </div>
+                    </li>
+                <%}%>
 
-    </ul>
-</nav>
+            </ul>
+        </div>
+    </div>
+</header>
+

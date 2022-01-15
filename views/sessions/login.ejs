@@ -1,16 +1,23 @@
-<h1>Log in</h1>
-<%if (message) {%>
-    <p><%= message%></p>
-<%}%>   
-<form action="/sessions/login" method="post">
-    <fieldset>
-        <!-- label "for" points to "id" of input -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-    </fieldset>
-    <fieldset>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-    </fieldset>
-    <input type="submit" value="Log in">
-</form>
+<div class="form-page text-center">
+    <div class="custom-form card">
+        <div class="card-body">
+            <form action="/sessions/login" method="post">
+                <img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo">
+                <h3>Login to plan your adventures!</h3>
+                <%if (message) {%>
+                    <p><%= message%></p>
+                <%}%>   
+                <fieldset>
+                    <!-- label "for" points to "id" of input -->
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                </fieldset>
+                <fieldset>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </fieldset>
+                <input type="submit" value="Log in" class="btn btn-lg btn-success">
+            </form>
+        </div>
+    </div>
+</div>

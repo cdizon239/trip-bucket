@@ -40,6 +40,7 @@ function emailReminder() {
                         subject: 'Book reservations for your upcoming trip!',
                         text: 'email flow test',
                         html: `<h1> TripBucket </h1>
+                        <img src="https://i.ibb.co/VDRvtqR/364164.jpg" alt="trip bucket logo">
                         <h3> Reminder: you have a trip coming up in 30 days...</h3>`
                     }
 

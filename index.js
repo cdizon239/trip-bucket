@@ -10,8 +10,6 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const nodemailer = require('nodemailer')
 const emailReminder = require('./utils/email')
-const cron = require('node-cron')
-
 
 
 // MIDDLEWARES
@@ -66,18 +64,8 @@ app.get('/', (req, res) => {
     res.render('home/home.ejs')
 })
 
+// emailReminder()
 
-
-
-// app.post('/sendEmail', (req, res) => {
-//     console.log('sendEmail route hit');
-//     emailReminder()
-//     res.send('ok')
-// })
-
-cron.schedule('*/3 * * * *', () => {
-    emailReminder()
-})
 
 app.listen(app.get('port'), () => {
     console.log(`Magic is working in port ${app.get('port')}`)

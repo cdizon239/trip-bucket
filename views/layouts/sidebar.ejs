@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- mapbox cdn -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet'/>
     <!-- Load the `mapbox-gl-geocoder` plugin. -->
@@ -20,14 +21,16 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
-    <div class="sidebar-view">
-        <div>
-            <side><%- body %></side>
+    <main>
+        <div class="sidebar-view">
+            <div>
+                <side><%- body %></side>
+            </div>
+            <main>
+                <div id='map' style='width: 100%; height: 100vh;'></div>
+            </main>
         </div>
-        <main>
-            <div id='map' style='width: 100%; height: 100vh;'></div>
-        </main>
-    </div>
+    </main>    
     <%- include('../partials/footer.ejs') %>
     <script>
         // parse trip
@@ -180,11 +183,9 @@
             
 
         })
-
-
-    </script>
     
 
-
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
