@@ -21,10 +21,18 @@ p {
 .sidebar-view {
     display: grid;
     grid-template-columns: 1.5fr 4fr;
+    grid-template-rows: 1fr;
 }
 
 .sidebar-view:first-child {
     overflow: scroll;
+}
+
+.landing-cover-page {
+    background-image: url('../images/palawan.jpg');
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
+
 }
 
 .trips-list {

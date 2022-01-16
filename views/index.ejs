@@ -1,8 +1,8 @@
 <div class="sidebar-view">
-    <div class="flex-shrink-0 p-3 bg-white">
+    <div>
         <h3>Your trips:</h3>
-        <ul class="list-unstyled ps-0">
-            <%if (userId) {%>
+        <ul>
+            <%if (userId) { %>
                 <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
                 <% let tripsList = JSON.parse(trips) %>
                 <% tripsList =  tripsList.sort((a,b) => new Date(b.start_date) - new Date(a.start_date)) %>
@@ -10,52 +10,52 @@
                     <% let key = trip.start_date ? new Date(trip['start_date']).getFullYear() : 'Unscheduled' %>
                     <% if(!newData[key]) { %> 
                         <% newData[key] = [] %>
-                    <% } %> 
+                        <% } %>
                     <% newData[key].push(trip) %>
-                    <% return newData %> 
-                <% }, {}) %> 
-                <% for (year in groupTripsByYear) {%>
-                    <li class="mb-1 card">
-                        <div class="card-body">
-                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                                <h3><%= year%></h3>
-                            </button>
-                            <div class="collapse show" id="home-collapse" style="">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                    <% return newData %>
+    
+                    <% } , {}) %>
+                    <% for (year in groupTripsByYear) { %>
+                        <li class="mb-1 card">
+                            <div class="card-body">
+                                <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                                    <h3><%= year%></h3>
+                                </button>
+                                <div class="collapse show" id="home-collapse" style="">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
                                     <%(groupTripsByYear[year]).forEach((trip) => { %>
                                         <li><a class="link-dark rounded" href="/trips/<%= trip._id %>"><%= trip.name %></a>
-                                    <% }) %>
-                                </ul>
+                                        <% }) %>
+                                    </ul>
+                                </div>
                             </div>
+                        </li>
+                        <% } %>
+                <% } else { %>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">No trips listed yet</h5>
+                            <p class="card-text">Click below to plan your first trip or take a look at one of the suggested trips to add on your bucketlist!</p>
+                            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
                         </div>
-                    </li>
-                <% } %>
-            <% } else { %>
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">No trips listed yet</h5>
-                        <p class="card-text">Click below to plan your first trip or take a look at one of the suggested trips to add on your bucketlist!</p>
-                        <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
                     </div>
-                </div>
-            <% } %>
+                    <% } %>
         </ul>
         <ul class="border-top my-3"></ul>
-
         <h3>Suggested trips</h3>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <div class="collapse show" id="home-collapse" style="">
                     <% JSON.parse(suggestedTrips).forEach((trip) => { %>
                         <li><a class="link-dark rounded" href="/trips/toAdd/<%= trip._id %>"><%= trip.name %></a></li>
-                    <% }) %>
+                        <% }) %>
                 </div>
             </li>
         </ul>
     </div>
+    </div>
     <div id='map' style='width: 100%; height: 100vh;'></div>
 </div>
-
 <!-- CLIENT SIDE -->
 <script>
     // access the places in the database
@@ -69,7 +69,7 @@
     zoom: 1// starting zoom
     });
 
-    //  add markers fro mthe database
+    //  add markers from the database
     trips.forEach((trip) => {
         if (trip.places_to_visit.length > 0) {
             trip.places_to_visit.forEach((pin) => {
