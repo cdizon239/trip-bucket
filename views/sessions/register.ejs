@@ -1,25 +1,34 @@
-<h1>Register</h1>
-<%if (message) {%>
-    <p><%= message%></p>
-<%}%>   
-<form action="/sessions/register" method="post">
-    <fieldset>
-        <!-- label "for" points to "id" of input -->
-        <label for="useremail">Email:</label>
-        <input type="text" id="useremail" name="useremail">
-    </fieldset>
-    <fieldset>
-        <!-- label "for" points to "id" of input -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-    </fieldset>
-    <fieldset>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-    </fieldset>
-    <fieldset>
-        <label for="verifyPassword">Re-type Password:</label>
-        <input type="password" id="verifyPassword" name="verifyPassword">
-    </fieldset>
-    <input type="submit" value="Register">
-</form>
+<div class="form-page text-center">
+    <div class="custom-form card">
+        <div class="form card-body">
+            <form action="/sessions/register" method="post" _lpchecked=1>
+                <img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo">
+                <h3>Start checking off your travel bucketlist</h3>
+                <%if (message) {%>
+                    <p><%= message%></p> 
+                <%}%>
+                <div class="form-floating">
+                    <!-- label "for" points to "id" of input -->
+                    <input type="text" class="form-control" id="useremail" name="useremail">
+                    <label for="useremail">Useremail</label>
+                </div>
+                <div class="form-floating">
+                    <!-- label "for" points to "id" of input -->
+                    <input type="text" class="form-control" id="username" name="username">
+                    <label for="username">Username</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password">
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="verifyPassword" name="verifyPassword">
+                    <label for="verifyPassword">Verify Password</label>
+                </div>
+                <div class="form-center-button">
+                    <input type="submit" value="Sign up" class="btn btn-lg btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

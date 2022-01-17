@@ -127,3 +127,14 @@ button > h3 {
     display: flex;
     justify-content: flex-end;
 }
+.form-center-button {
+    padding: 5% 0%;
+}
+.form {
+    padding: 2% 5%;
+}
+.btn-primary {
+    background-color: #00577d;
+    border-color: #00577d;
+
+}
