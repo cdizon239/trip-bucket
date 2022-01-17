@@ -4,8 +4,10 @@
         <div class="nav-bar" style="width: 100vw;">
             <a class="navbar-brand mb-0 h1" href="<%= home %>"><img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo"></a>
             <ul class="nav">
-                <li><a href="/trips" class="nav-link px-2 text-secondary">Trips</a></li>
-                <li><a href="/" class="nav-link px-2 text-secondary">About</a></li>
+                <div class="right-submit-button">
+                    <li><a href="/trips" class="nav-link px-2 text-secondary">Trips</a></li>
+                    <li><a href="/" class="nav-link px-2 text-secondary">About</a></li>
+                </div>
                 <% if (loggedIn) {%>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
