@@ -9,14 +9,16 @@
                     <li><a href="/" class="nav-link px-2 text-secondary">About</a></li>
                 </div>
                 <% if (loggedIn) {%>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Hello, <%= username%>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="/sessions/logout">Logout</a></li>
-                        </ul>
-                      </li>                
+                    <div class="right-submit-button">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Hello, <%= username%>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="/sessions/logout">Logout</a></li>
+                            </ul>
+                          </li>                
+                    </div>
                 <%} else {%>          
                         <div class="right-submit-button">
                             <a class="btn btn-primary me-2" href="/sessions/register"> Signup</a>

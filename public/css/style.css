@@ -111,7 +111,7 @@ button > h3 {
 .right-submit-button {
     display: flex;
     justify-content: flex-end;
-    padding-top: 3%;
+    padding-top: 2%;
 }
 .form-center-button {
     padding: 5% 0%;
