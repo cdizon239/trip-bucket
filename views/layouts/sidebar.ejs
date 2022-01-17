@@ -153,8 +153,8 @@
             }
 
             let getDirectionsFromCurrentLocation = (e) => {
-                let placeToGoTitle = e.currentTarget.previousElementSibling.querySelector('.place-title').innerText
-                let placeToGoName = e.currentTarget.previousElementSibling.querySelector('.place-name').innerText
+                let placeToGoTitle = e.currentTarget.parentNode.parentNode.querySelector('.place-title').innerText
+                let placeToGoName = e.currentTarget.parentNode.parentNode.querySelector('.place-name').innerText
 
                 let placeToGo =  trip.places_to_visit.filter((place) => {
                         return place.title === placeToGoTitle && place.place_name === placeToGoName
