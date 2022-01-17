@@ -32,7 +32,6 @@ function emailReminder() {
         users.forEach((user) => {
 
             Trip.find({$and: [{owner: ObjectID(user.id)},{start_date: reminderDate}]}, (err, trips) => {
-                console.log(trips)
                 if (trips.length > 0) { 
                     // let tripNames = trips.map(trip => trip.name)  
                                       

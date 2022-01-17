@@ -4,7 +4,9 @@
     <p class="lead mb-4 text-white">Plan ahead and spend time on your trips enjoying every moment.</p>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
       <button class="btn btn-primary btn-lg px-4">Sign up</button>
-      <button type="button" class="btn btn-success btn-lg px-4">Login</button>
+      <% if (!loggedIn) { %>
+        <button type="button" class="btn btn-success btn-lg px-4">Login</button>
+      <% } %>
     </div>
   </div>
 </div>    

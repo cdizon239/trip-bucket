@@ -1,59 +1,63 @@
-<div class="sidebar-view">
-    <div class="flex-shrink-0 p-3 bg-white">
-        <div class="title-container">
-            <h3>Your trips:</h3>
-            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
-        </div>
-        <ul>
-            <%if (userId) { %>
-                <% let tripsList = JSON.parse(trips) %>
-                <% tripsList =  tripsList.sort((a,b) => new Date(b.start_date) - new Date(a.start_date)) %>
-                <% let groupTripsByYear = tripsList.reduce((newData, trip) => { %>
-                    <% let key = trip.start_date ? new Date(trip['start_date']).getFullYear() : 'Unscheduled' %>
-                    <% if(!newData[key]) { %> 
-                        <% newData[key] = [] %>
-                        <% } %>
-                    <% newData[key].push(trip) %>
-                    <% return newData %>
-    
-                    <% } , {}) %>
-                    <% for (year in groupTripsByYear) { %>
-                        <li class="mb-1 card">
-                            <div class="card-body">
-                                <button class="btn btn-toggle rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                                    <h4>> <%= year%></h4>
-                                </button>
-                                <div class="collapse" id="home-collapse">
-                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                                    <%(groupTripsByYear[year]).forEach((trip) => { %>
-                                        <li><a class="link-dark rounded" href="/trips/<%= trip._id %>"><%= trip.name %></a>
-                                        <% }) %>
-                                    </ul>
+<div class="sidebar-view" id="sidebar">
+    <div class="side-flex">
+        <side id="collapseSidebar" class="sidebar">
+            <div class="title-container">
+                <h3>Your trips:</h3>
+                <a href="/trips/new" class="btn btn-primary">Plan a trip</a>
+            </div>
+            <ul>
+                <%if (userId) { %>
+                    <% let tripsList = JSON.parse(trips) %>
+                    <% tripsList =  tripsList.sort((a,b) => new Date(b.start_date) - new Date(a.start_date)) %>
+                    <% let groupTripsByYear = tripsList.reduce((newData, trip) => { %>
+                        <% let key = trip.start_date ? new Date(trip['start_date']).getFullYear() : 'Unscheduled' %>
+                        <% if(!newData[key]) { %>
+                            <% newData[key] = [] %>
+                            <% } %>
+                        <% newData[key].push(trip) %>
+                        <% return newData %>
+                        <% } , {}) %>
+                        <% for (year in groupTripsByYear) { %>
+                            <li class="mb-1 card">
+                                <div class="card-body">
+                                    <button class="btn btn-toggle rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                                        <h4>> <%= year%></h4>
+                                    </button>
+                                    <div class="collapse" id="home-collapse">
+                                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                                        <%(groupTripsByYear[year]).forEach((trip) => { %>
+                                            <li><a class="link-dark rounded" href="/trips/<%= trip._id %>"><%= trip.name %></a>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
                                 </div>
+                            </li>
+                            <% } %>
+                    <% } else { %>
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">No trips listed yet</h5>
+                                <p class="card-text">Click below to plan your first trip or take a look at one of the suggested trips to add on your bucketlist!</p>
+                                <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
                             </div>
-                        </li>
-                        <% } %>
-                <% } else { %>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">No trips listed yet</h5>
-                            <p class="card-text">Click below to plan your first trip or take a look at one of the suggested trips to add on your bucketlist!</p>
-                            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
                         </div>
+                        <% } %>
+            </ul>
+            <ul class="border-top my-3"></ul>
+            <h3>Suggested trips</h3>
+            <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                    <div class="collapse show" id="home-collapse" style="">
+                        <% JSON.parse(suggestedTrips).forEach((trip) => { %>
+                            <li><a class="link-dark rounded" href="/trips/toAdd/<%= trip._id %>"><%= trip.name %></a></li>
+                            <% }) %>
                     </div>
-                    <% } %>
-        </ul>
-        <ul class="border-top my-3"></ul>
-        <h3>Suggested trips</h3>
-        <ul class="list-unstyled ps-0">
-            <li class="mb-1">
-                <div class="collapse show" id="home-collapse" style="">
-                    <% JSON.parse(suggestedTrips).forEach((trip) => { %>
-                        <li><a class="link-dark rounded" href="/trips/toAdd/<%= trip._id %>"><%= trip.name %></a></li>
-                        <% }) %>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </side>
+        <button class="btn btn-secondary" type="button" id="collapseToggle">
+            <
+        </button>
     </div>
     <div class="map-wrapper">
         <div id='map' style='width: 100%; height: 100vh;'></div>
@@ -61,6 +65,10 @@
 </div>
 <!-- CLIENT SIDE -->
 <script>
+    document.querySelector('#collapseToggle').addEventListener('click', () => {
+        document.querySelector('#collapseSidebar').classList.toggle('hidden')
+    })
+
     // access the places in the database
     let trips= JSON.parse('<%- trips %>')
 

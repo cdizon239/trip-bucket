@@ -1,7 +1,7 @@
 <header class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
         <% let home = loggedIn ? '/trips' : '/' %>
-        <div class="nav-bar">
+        <div class="nav-bar" style="width: 100vw;">
             <a class="navbar-brand mb-0 h1" href="<%= home %>"><img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo"></a>
             <ul class="nav">
                 <li><a href="/trips" class="nav-link px-2">Trips</a></li>
@@ -15,14 +15,12 @@
                           <li><a class="dropdown-item" href="/sessions/logout">Logout</a></li>
                         </ul>
                       </li>                
-                <%} else {%>   
-                    <li>        
-                        <div class="text-end">
+                <%} else {%>          
+                        <div class="right-submit-button">
                             <a class="btn btn-primary me-2" href="/sessions/register"> Signup</a>
                             <a class="btn btn-success me-2" href="/sessions/login"> Login</a>
-
                         </div>
-                    </li>
+
                 <%}%>
 
             </ul>

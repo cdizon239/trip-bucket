@@ -27,13 +27,15 @@ button > h3 {
 }
 
 .sidebar-view {
-    display: grid;
-    grid-template-columns: 1.5fr 4fr;
-    grid-template-rows: 1fr;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    /* display: grid;
+    grid-template-columns: 1.5fr 3fr; */
 }
 
-.sidebar-view:first-child {
-    overflow: scroll;
+.side-flex {
+    display: flex;
 }
 
 .nav-bar {
@@ -44,6 +46,7 @@ button > h3 {
 
 .sidebar {
     padding: 5%;
+    overflow-y: scroll;
 }
 
 .landing-cover-page {
@@ -136,5 +139,27 @@ button > h3 {
 .btn-primary {
     background-color: #00577d;
     border-color: #00577d;
+}
+.btn-primary, .btn-danger, .btn-success {
+    min-width: 100px;
+}
+#collapseToggle {
+    padding-left: 1%;
+    text-align: center;
+    width: 5px;
+}
+#collapseSidebar {
+    min-width: 30vw;
+    overflow-y: scroll;
+}
+
+@media screen and (max-width: 425px) {
+    .side-flex {
+        width: 100vw
+    }
+    #collapseSidebar {
+        height: 100vh;
+        overflow-y: scroll;
+    }
 
 }

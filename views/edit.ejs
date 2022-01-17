@@ -1,10 +1,10 @@
 <div class="sidebar">
     <h1 class="title">Edit Trip</h1>
-    <div class="right-submit-button">
-        <a href="/trips/<%= JSON.parse(trip)._id%> " class="btn btn-outline-secondary">Cancel</a>
-        <input type="submit" class="btn btn-primary" value="Save Trip" id="submit">
-    </div>
     <form action="/trips/<%= JSON.parse(trip)._id%>?_method=PUT" method='post'>
+        <div class="right-submit-button">
+            <a href="/trips/<%= JSON.parse(trip)._id%> " class="btn btn-outline-secondary">Cancel</a>
+            <input type="submit" class="btn btn-primary" value="Save Trip" id="submit">
+        </div>
         <label for="name"> Trip name</label>
         <input type="text" name="name" id="name" value="<%= JSON.parse(trip).name%>" class="form-control">
         <label for="startDate">Start date</label>
