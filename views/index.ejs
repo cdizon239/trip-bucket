@@ -1,9 +1,11 @@
 <div class="sidebar-view">
     <div class="flex-shrink-0 p-3 bg-white">
-        <h3>Your trips:</h3>
+        <div class="title-container">
+            <h3>Your trips:</h3>
+            <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
+        </div>
         <ul>
             <%if (userId) { %>
-                <a href="/trips/new" class="btn btn-primary">Plan a new trip</a>
                 <% let tripsList = JSON.parse(trips) %>
                 <% tripsList =  tripsList.sort((a,b) => new Date(b.start_date) - new Date(a.start_date)) %>
                 <% let groupTripsByYear = tripsList.reduce((newData, trip) => { %>
@@ -18,10 +20,10 @@
                     <% for (year in groupTripsByYear) { %>
                         <li class="mb-1 card">
                             <div class="card-body">
-                                <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                                    <h3><%= year%></h3>
+                                <button class="btn btn-toggle rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                                    <h4>> <%= year%></h4>
                                 </button>
-                                <div class="collapse show" id="home-collapse" style="">
+                                <div class="collapse" id="home-collapse">
                                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
                                     <%(groupTripsByYear[year]).forEach((trip) => { %>
                                         <li><a class="link-dark rounded" href="/trips/<%= trip._id %>"><%= trip.name %></a>
@@ -53,7 +55,8 @@
             </li>
         </ul>
     </div>
-    <div id='map' style='width: 100%; height: 100vh;'>
+    <div class="map-wrapper">
+        <div id='map' style='width: 100%; height: 100vh;'></div>
     </div>
 </div>
 <!-- CLIENT SIDE -->

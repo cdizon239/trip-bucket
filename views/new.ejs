@@ -1,18 +1,21 @@
-<div class="sidebar-view">
-    <div>
+<div id='map' style='width: 100%; height: 100vw;'>
+</div>
+<div class="modal-background">
+    <div class="flex-shrink-0 p-3 bg-white modal-textbox card">
+        <a href="/trips"> < Back to trips</a>
         <h1>Plan a New Trip</h1>
         <form action="/trips" method='post'>
             <label for="name">Name</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name" class="form-control">
             <label for="startDate">Start date</label>
-            <input type="date" name="start_date" id="startDate">
+            <input type="date" name="start_date" id="startDate" class="form-control">
             <label for="endDate">End date</label>
-            <input type="date" name="end_date" id="endDate">
+            <input type="date" name="end_date" id="endDate" class="form-control">
             <p id="dateWarning"></p>
-            <input type="submit" value="Add New Trip" class="btn btn-primary" id="submit">
+            <div class="right-submit-button">
+                <input type="submit" value="Add New Trip" class="btn btn-primary" id="submit">
+            </div>
         </form>
-    </div>
-    <div id='map' style='width: 100%; height: 100vw;'>
     </div>
 </div>
 <script>
@@ -33,6 +36,8 @@ endDateControl.addEventListener('change', () => {
         document.getElementById('submit').disabled = true
     } else {
         document.querySelector('#dateWarning').innerText = ''
+        document.getElementById('submit').disabled = false
+
     }
 })
 

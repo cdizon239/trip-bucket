@@ -1,22 +1,36 @@
-<div>
-    <a href="/trips">Back to trips</a>
-    <h1><%= JSON.parse(trip).name %></h1>
+<div class="sidebar">
+    <a href="/trips"> < Back to trips</a>
+    <h1 class="title"><%= JSON.parse(trip).name %></h1>
     <p>
         The trip <%= JSON.parse(trip).name %> starts on <%= start_date %> and ends on <%= end_date %>
     </p>
-    <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
-    <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
-        <input type="submit" value="Delete trip" class="btn btn-danger">
-    </form>
-    <h3>Places to visit</h3>
-    <div class="placesList">
-    <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
-        <div class="place">
-            <p class="place-title"><%= place.title %></p>
-            <p class="place-name"><%= place.place_name %></p>
-        </div>
-        <button class="go-to-place">Directions</button>
-    <%})%>
+    <div class="right-submit-button">
+        <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
+        <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
+            <input type="submit" value="Delete trip" class="btn btn-danger">
+        </form>
     </div>
-
+    <h3 class="title">Places to visit</h3>
+    <% if ((JSON.parse(trip).places_to_visit).length > 0) { %>
+        <div class="places-list">
+        <% JSON.parse(trip).places_to_visit.forEach((place) => { %>
+            <div class="place-info card">
+                <div class="place">
+                    <h5 class="place-title"><%= place.title %></h5>
+                    <p class="place-name"><%= place.place_name %></p>
+                </div>
+                <div class="right-submit-button">
+                    <button class="go-to-place btn btn-success">Directions</button>
+                </div>
+            </div>
+        <%})%>
+        </div>
+        <% } else { %>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Add a place to visit</h5>
+                    <p class="card-text">Search for a place on the map searchbox and add to this trip</p>
+                </div>
+            </div>
+            <% }%>
 </div>

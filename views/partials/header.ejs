@@ -1,21 +1,26 @@
 <header class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
         <% let home = loggedIn ? '/trips' : '/' %>
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="nav-bar">
             <a class="navbar-brand mb-0 h1" href="<%= home %>"><img src="/images/tripBucketLogoHigh.svg" alt="trip bucket logo"></a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <ul class="nav">
                 <li><a href="/trips" class="nav-link px-2">Trips</a></li>
                 <li><a href="/" class="nav-link px-2">About</a></li>
                 <% if (loggedIn) {%>
-                    <div class="text-end">
-                        <a class="btn btn-primary me-2" href="/sessions/logout"> Logout</a>
-                    </div>
-                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Hello, <%= username%>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="/sessions/logout">Logout</a></li>
+                        </ul>
+                      </li>                
                 <%} else {%>   
                     <li>        
                         <div class="text-end">
+                            <a class="btn btn-primary me-2" href="/sessions/register"> Signup</a>
                             <a class="btn btn-success me-2" href="/sessions/login"> Login</a>
-                            <a class="btn btn-primary me-2" href="/sessions/register"> Register</a>
+
                         </div>
                     </li>
                 <%}%>

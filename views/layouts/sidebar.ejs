@@ -78,7 +78,7 @@
                 let marker = new mapboxgl.Marker({
                     color: "#F05441"
                 }).setLngLat([pin.long, pin.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h1>${pin.title}</h1><p>${pin.place_name}</p>`)) 
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${pin.title}</h4><p>${pin.place_name}</p>`)) 
                 .addTo(map);
             })
         }
@@ -107,7 +107,7 @@
             console.log(placeToVisit);
                 new mapboxgl.Popup().setHTML(
                     `<h4>${data.result.text}</h4>
-                    <h5>Add to a trip</h5>
+                    <h5>Add place to this trip</h5>
                     <form action="/trips/${trip._id}/addPlace?_method=PATCH" method="POST">
                         <input type="hidden" name="lat" value="${placeToVisit.lat}" />
                         <input type="hidden" name="long" value="${placeToVisit.long}" />

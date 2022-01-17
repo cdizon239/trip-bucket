@@ -1,7 +1,7 @@
 @import url(//db.onlinewebfonts.com/c/02d8f1743ede250c7c9865f1574d7cc6?family=Circular+Book);
 
 * {
-    font-family: 'Circular Book';
+    font-family: 'Circular Book', Arial, Helvetica, sans-serif;
 
 }
 
@@ -9,13 +9,21 @@ body {
     height: 100vh;
 }
 
-button {
-    display: inline;
-}
-
 p {
     color: black;
     font-size: 16px;
+}
+button {
+    display: flex;
+    align-items: center;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+button > h3 {
+    display: inline;
 }
 
 .sidebar-view {
@@ -28,6 +36,16 @@ p {
     overflow: scroll;
 }
 
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar {
+    padding: 5%;
+}
+
 .landing-cover-page {
     background-image: url('../images/palawan.jpg');
     background-size: cover;
@@ -35,8 +53,23 @@ p {
 
 }
 
-.trips-list {
-    display: block;
+.places-list {
+    padding-top: 2%;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+
+}
+.title {
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+
+.place-info {
+    padding: 5%;
 }
 
 .hidden {
@@ -65,4 +98,32 @@ p {
     margin: 0 auto;
     height: 100vh;
     padding: 15% 20%;
+}
+.place-delete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-background {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* This means the modal will take the X% height of the parent */
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    overflow: scroll;
+    text-align: left;
+  }
+.modal-textbox {
+    max-width: 55%;
+    margin: 150px auto;
+    overflow: auto;
+    flex-direction: column;
+}
+.right-submit-button {
+    display: flex;
+    justify-content: flex-end;
 }
