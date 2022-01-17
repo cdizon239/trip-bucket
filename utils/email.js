@@ -33,15 +33,20 @@ function emailReminder() {
 
             Trip.find({$and: [{owner: ObjectID(user.id)},{start_date: reminderDate}]}, (err, trips) => {
                 if (trips.length > 0) { 
-                    // let tripNames = trips.map(trip => trip.name)  
-                                      
+                    let tripNames = trips.map(trip => trip.name)
+                    console.log(tripNames);       
                     const mailData = {
                         from: 'TripBucket',
                         to: `${user.useremail}`,
-                        subject: 'Book reservations for your upcoming trip!',
+                        subject: 'REMINDER: Book reservations for your upcoming trip in 30 days',
                         html: `<h1> TripBucket </h1>
-                        <img src="../public/images/palawan.jpg" alt="trip bucket logo">
-                        <h3> Reminder: you have a trip coming up in 30 days...</h3>`
+                        <h3> Reminder: you have a trip coming up in 30 days...</h3>
+                        <p> Dear TripBucket Traveler, </p>
+                        <p> This is a friendly reminder that you an upcoming trip scheduled in 30 days. <br> Make sure you book reservations for flights, hotels, and places you intend to visit.<br>This will help you maximize your time enjoying and living your best life during your trip.</p>
+                        
+                        <p>Cheers,
+                        <br>The TripBucket Team</p>
+                        `
                     }
 
                     transporter.sendMail(mailData, (err, info) => {
