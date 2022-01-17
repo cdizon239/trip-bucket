@@ -1,9 +1,16 @@
 <div class="sidebar">
     <a href="/trips"> < Back to trips</a>
     <h1 class="title"><%= JSON.parse(trip).name %></h1>
-    <p>
-        The trip <%= JSON.parse(trip).name %> starts on <%= start_date %> and ends on <%= end_date %>
-    </p>
+    <%if (start_date) {%>
+        <p>
+            The trip <%= JSON.parse(trip).name %> starts on <%= start_date %> and ends on <%= end_date %>
+        </p>
+        <%} else {%>
+            <h5>
+                "Edit" to schedule this trip
+            </h5>
+            <% } %>
+
     <div class="right-submit-button">
         <a href="/trips/<%= JSON.parse(trip)._id %>/edit" class="btn btn-primary">Edit trip</a>
         <form action="/trips/<%= JSON.parse(trip)._id %>?_method=DELETE" method="post">
