@@ -133,7 +133,7 @@ To get a local copy up and running follow these simple example steps.
 <img src="./demo_images/tripsLanding.png" alt="trips landing page">
 <img src="./demo_images/new.png" alt="new trip page">
 <img src="./demo_images/show.png" alt="show trip page">
-<img src="./demo_images/addToMap.png.png" alt="add place to map">
+<img src="./demo_images/addToMap.png" alt="add place to map">
 <img src="./demo_images/edit.png" alt="edit trip page">
 <img src="./demo_images/directions.png" alt="show directions">
 
